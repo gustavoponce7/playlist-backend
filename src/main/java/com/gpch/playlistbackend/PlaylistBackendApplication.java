@@ -24,6 +24,7 @@ public class PlaylistBackendApplication {
     public CommandLineRunner init(SongService songService,
                                   PlaylistService playlistService) {
         return (args) -> {
+            //Playlist Let's get high
             Song song1 = songService.createSong(Song.builder().name("One Love").artist("Bob Marley").url("https://www.youtube.com/watch?v=1PDdCmJ84LI").build());
             Playlist playlist1 = playlistService.createPlayList(Playlist.builder().name("Reggae").description("Let's get high").songs(Arrays.asList(song1)).build());
         };
