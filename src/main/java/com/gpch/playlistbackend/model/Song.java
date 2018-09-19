@@ -1,14 +1,15 @@
 package com.gpch.playlistbackend.model;
 
+import com.gpch.playlistbackend.dto.PlaylistDTO;
+import com.gpch.playlistbackend.dto.SongDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -28,12 +29,19 @@ public class Song {
     @ManyToMany(mappedBy="songs")
     private List<Playlist> playlists;
 
-    public Map<String, Object> toDto(){
-        Map<String, Object> dto = new HashMap<>();
-        dto.put("id", this.id);
-        dto.put("name", this.name);
-        dto.put("artist", this.artist);
-        dto.put("url", this.url);
-        return dto;
+    public SongDTO toDto(){
+        return SongDTO.builder()
+                .id(this.id)
+                .name(this.name)
+                .artist(this.artist)
+                .url(this.url)
+                .playlists(playlists.stream()
+                        .map(playlist -> PlaylistDTO.builder()
+                                            .id(playlist.getId())
+                                            .name(playlist.getName())
+                                            .description(playlist.getDescription())
+                                            .build())
+                                            .collect(Collectors.toList()))
+                .build();
     }
 }

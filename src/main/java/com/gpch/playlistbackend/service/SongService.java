@@ -5,6 +5,8 @@ import com.gpch.playlistbackend.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SongService {
 
@@ -17,6 +19,10 @@ public class SongService {
 
     public Song createSong(Song song){
         return songRepository.save(song);
+    }
+
+    public List<Song> getSongslists(){
+        return songRepository.findAll();
     }
 
 }
