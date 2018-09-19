@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class PlaylistController {
@@ -19,7 +21,7 @@ public class PlaylistController {
     }
 
     @GetMapping("/playlists")
-    public List<Playlist> getPlaylists(){
-        return playlistService.getPlaylists();
+    public List<Map<String, Object>> getPlaylists(){
+        return playlistService.getPlaylists().stream().map(Playlist::toDto).collect(Collectors.toList());
     }
 }

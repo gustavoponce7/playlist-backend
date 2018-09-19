@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -26,4 +28,13 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "song_id", referencedColumnName="id")
     )
     private List<Song> songs;
+
+    public Map<String, Object> toDto(){
+        Map<String, Object> dto = new HashMap<>();
+        dto.put("id", this.id);
+        dto.put("name", this.name);
+        dto.put("description", this.description);
+        dto.put("songs", songs.stream().map(Song::toDto));
+        return dto;
+    }
 }

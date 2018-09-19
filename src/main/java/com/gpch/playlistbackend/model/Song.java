@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Data
@@ -25,4 +27,13 @@ public class Song {
     private String url;
     @ManyToMany(mappedBy="songs")
     private List<Playlist> playlists;
+
+    public Map<String, Object> toDto(){
+        Map<String, Object> dto = new HashMap<>();
+        dto.put("id", this.id);
+        dto.put("name", this.name);
+        dto.put("artist", this.artist);
+        dto.put("url", this.url);
+        return dto;
+    }
 }
