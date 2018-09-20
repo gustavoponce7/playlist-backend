@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -45,4 +46,10 @@ public class Playlist {
                         .collect(Collectors.toList()))
                 .build();
     }
+
+    /*public PlaylistDTO toDto(){
+        ModelMapper modelMapper = new ModelMapper();
+        PlaylistDTO dto = modelMapper.map(this, PlaylistDTO.class);
+        return dto;
+    }*/
 }

@@ -21,7 +21,7 @@ public class SongService {
         return songRepository.save(song);
     }
 
-    public List<Song> getSongslists(){
+    public List<Song> getSongs(){
         return songRepository.findAll();
     }
 

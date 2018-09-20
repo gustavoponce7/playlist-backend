@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -44,4 +45,10 @@ public class Song {
                                             .collect(Collectors.toList()))
                 .build();
     }
+
+    /*public SongDTO toDto(){
+        ModelMapper modelMapper = new ModelMapper();
+        SongDTO dto = modelMapper.map(this, SongDTO.class);
+        return dto;
+    }*/
 }

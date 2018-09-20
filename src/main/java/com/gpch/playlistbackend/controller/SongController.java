@@ -21,7 +21,7 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public List<SongDTO> getSongslist(){
-        return songService.getSongslists().stream().map(Song::toDto).collect(Collectors.toList());
+    public List<SongDTO> getSongs(){
+        return songService.getSongs().stream().map(Song::toDto).collect(Collectors.toList());
     }
 }
