@@ -1,5 +1,6 @@
 package com.gpch.playlistbackend;
 
+import com.gpch.playlistbackend.dto.PlaylistDTO;
 import com.gpch.playlistbackend.dto.SongDTO;
 import com.gpch.playlistbackend.model.Playlist;
 import com.gpch.playlistbackend.model.Song;
@@ -33,7 +34,8 @@ public class PlaylistBackendApplication {
                     .url("https://www.youtube.com/watch?v=1PDdCmJ84LI")
                     .playlists(Collections.emptyList())
                     .build());
-            Playlist playlist1 = playlistService.createPlayList(Playlist.builder().name("Reggae").description("Let's get high").songs(Arrays.asList(song1)).build());
+
+            Playlist playlist1 = playlistService.createPlaylist(PlaylistDTO.builder().name("Reggae").description("Let's get high").songs(Collections.emptyList()).build());
         };
     }
 }

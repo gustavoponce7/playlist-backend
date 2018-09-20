@@ -6,6 +6,7 @@ import com.gpch.playlistbackend.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class SongService {
         this.songRepository = songRepository;
     }
 
+    @Transactional
     public Song createSong(SongDTO songDTO){
         return songRepository.save(Song.builder()
                                 .name(songDTO.getName())
@@ -38,10 +40,12 @@ public class SongService {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
+    @Transactional
     public void deleteSongById(Integer songId){
        songRepository.deleteById(songId);
     }
 
+    @Transactional
     public Song updateSong(SongDTO songDTO){
         Song song = songRepository.findById(songDTO.getId())
                 .orElseThrow(IllegalArgumentException::new);
