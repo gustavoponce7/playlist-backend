@@ -1,11 +1,13 @@
 package com.gpch.playlistbackend.service;
 
+import com.gpch.playlistbackend.dto.PlaylistDTO;
 import com.gpch.playlistbackend.model.Playlist;
 import com.gpch.playlistbackend.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PlaylistService {
@@ -21,7 +23,8 @@ public class PlaylistService {
         return playlistRepository.save(playlist);
     }
 
-    public List<Playlist> getPlaylists(){
-        return  playlistRepository.findAll();
+    public List<PlaylistDTO> getPlaylists(){
+        return  playlistRepository.findAll().stream()
+                .map(Playlist::toDto).collect(Collectors.toList());
     }
 }

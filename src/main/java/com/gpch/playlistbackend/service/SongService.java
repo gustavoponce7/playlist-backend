@@ -1,11 +1,14 @@
 package com.gpch.playlistbackend.service;
 
+import com.gpch.playlistbackend.dto.SongDTO;
 import com.gpch.playlistbackend.model.Song;
 import com.gpch.playlistbackend.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SongService {
@@ -17,12 +20,35 @@ public class SongService {
         this.songRepository = songRepository;
     }
 
-    public Song createSong(Song song){
-        return songRepository.save(song);
+    public Song createSong(SongDTO songDTO){
+        return songRepository.save(Song.builder()
+                                .name(songDTO.getName())
+                                .artist(songDTO.getArtist())
+                                .url(songDTO.getUrl())
+                                .playlists(Collections.emptyList())
+                                .build());
     }
 
     public List<Song> getSongs(){
         return songRepository.findAll();
+    }
+
+    public Song getSongById(Integer songId){
+        return songRepository.findById(songId)
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public void deleteSongById(Integer songId){
+       songRepository.deleteById(songId);
+    }
+
+    public Song updateSong(SongDTO songDTO){
+        Song song = songRepository.findById(songDTO.getId())
+                .orElseThrow(IllegalArgumentException::new);
+        song.setArtist(songDTO.getArtist());
+        song.setName(songDTO.getName());
+        song.setUrl(songDTO.getUrl());
+        return songRepository.save(song);
     }
 
 }
