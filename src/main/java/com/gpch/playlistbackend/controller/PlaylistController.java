@@ -43,9 +43,9 @@ public class PlaylistController {
         return playlistService.createPlaylist(playlistDTO).toDto();
     }
 
-    @PutMapping
-    public PlaylistDTO updatePlaylist(@RequestBody PlaylistDTO playlistDTO){
-        return playlistService.updatePlaylist(playlistDTO).toDto();
+    @PutMapping("/{playlistId}")
+    public PlaylistDTO updatePlaylist(@PathVariable Integer playlistId, @RequestBody PlaylistDTO playlistDTO){
+        return playlistService.updatePlaylist(playlistId, playlistDTO).toDto();
     }
 
     @PostMapping(("/{playlistId}/song"))

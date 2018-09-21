@@ -45,14 +45,15 @@ public class SongService {
        songRepository.deleteById(songId);
     }
 
+    //NOTE: if @Transactional annotation exists at method level no need to call save method to persist the information
     @Transactional
-    public Song updateSong(SongDTO songDTO){
-        Song song = songRepository.findById(songDTO.getId())
+    public Song updateSong(Integer songId, SongDTO songDTO){
+        Song song = songRepository.findById(songId)
                 .orElseThrow(IllegalArgumentException::new);
         song.setArtist(songDTO.getArtist());
         song.setName(songDTO.getName());
         song.setUrl(songDTO.getUrl());
-        return songRepository.save(song);
+        return song;
     }
 
 }

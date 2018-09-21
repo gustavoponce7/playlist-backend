@@ -43,8 +43,8 @@ public class SongController {
         return songService.createSong(songDTO).toDto();
     }
 
-    @PutMapping
-    public SongDTO updateSong(@RequestBody SongDTO songDTO){
-        return songService.updateSong(songDTO).toDto();
+    @PutMapping("/{songId}")
+    public SongDTO updateSong(@PathVariable Integer songId, @RequestBody SongDTO songDTO){
+        return songService.updateSong(songId, songDTO).toDto();
     }
 }

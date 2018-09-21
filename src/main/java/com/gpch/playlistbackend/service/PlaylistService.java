@@ -49,8 +49,8 @@ public class PlaylistService {
     }
 
     @Transactional
-    public Playlist updatePlaylist(PlaylistDTO playlistDTO){
-        Playlist playlist = playlistRepository.findById(playlistDTO.getId())
+    public Playlist updatePlaylist(Integer playlistId, PlaylistDTO playlistDTO){
+        Playlist playlist = playlistRepository.findById(playlistId)
                 .orElseThrow(IllegalArgumentException::new);
         playlist.setName(playlistDTO.getName());
         playlist.setDescription(playlistDTO.getDescription());
