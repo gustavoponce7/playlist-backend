@@ -27,7 +27,7 @@ public class Song {
     private String name;
     private String artist;
     private String url;
-    @ManyToMany(mappedBy="songs")
+    @ManyToMany(mappedBy="songs", fetch = FetchType.EAGER)
     private List<Playlist> playlists;
 
     public SongDTO toDto(){
