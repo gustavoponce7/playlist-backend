@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZoneId;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,7 +25,9 @@ public class PlaylistController {
     }
 
     @GetMapping
-    public List<PlaylistDTO> getPlaylists(){
+    public List<PlaylistDTO> getPlaylists(TimeZone tz, ZoneId zid){
+        System.out.println("Time Zone: " + tz);
+        System.out.println("Zone Id: " + zid);
         return playlistService.getPlaylists().stream()
                 .map(Playlist::toDto).collect(Collectors.toList());
     }
